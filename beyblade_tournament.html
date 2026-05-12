@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公司爆旋陀螺比賽 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --pink: #da1c5d;
+  --pink-dark: #b01549;
+  --pink-light: #f5bad1;
+  --pink-faint: #fdf0f5;
+  --dark: #0f0a0d;
+  --dark2: #1e1118;
+  --mid: #3a2030;
+  --muted: #8c6878;
+  --border: rgba(218,28,93,0.18);
+  --border-light: rgba(218,28,93,0.10);
+  --white: #fff;
+  --off: #faf7f8;
+  --gold: #e9a825;
+  --silver: #9ea8b3;
+  --bronze: #c87941;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+  background: var(--off);
+  color: var(--dark);
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+  padding: 72px 24px 60px;
+  text-align: center;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 110%, rgba(218,28,93,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(218,28,93,0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-spin {
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 340px; height: 340px;
+  border-radius: 50%;
+  border: 1px solid rgba(218,28,93,0.18);
+  animation: spin 18s linear infinite;
+}
+.hero-spin::after {
+  content: '';
+  position: absolute;
+  inset: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(218,28,93,0.12);
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--pink);
+  font-weight: 700;
+  margin-bottom: 14px;
+  position: relative;
+}
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 10vw, 88px);
+  line-height: 1;
+  color: var(--white);
+  letter-spacing: .03em;
+  position: relative;
+  margin-bottom: 6px;
+}
+.hero-title span { color: var(--pink); }
+.hero-subtitle {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 32px;
+  position: relative;
+}
+.hero-pills {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.pill {
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid;
+}
+.pill-pink { background: var(--pink); color: #fff; border-color: var(--pink); }
+.pill-outline { background: transparent; color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.2); }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  background: var(--pink);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
+}
+.stat-item {
+  padding: 18px 8px;
+  border-right: 1px solid rgba(255,255,255,0.2);
+}
+.stat-item:last-child { border-right: none; }
+.stat-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: .04em;
+}
+.stat-lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  margin-top: 3px;
+  letter-spacing: .05em;
+}
+
+/* ── LAYOUT ── */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ── SECTION ── */
+.section { padding: 48px 20px; }
+.section:nth-child(even) { background: #fff; }
+.section-inner { max-width: 900px; margin: 0 auto; }
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.section-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: -.01em;
+}
+.section-line { flex: 1; height: 1px; background: var(--border); }
+
+/* ── CARDS ── */
+.card {
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 20px 22px;
+  box-shadow: 0 2px 12px rgba(218,28,93,0.05);
+}
+.card-pink {
+  background: var(--pink-faint);
+  border-color: var(--border);
+}
+
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 560px) { .info-grid { grid-template-columns: 1fr; } }
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 9px 0;
+  border-bottom: 1px solid #f0e8ec;
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.info-row:last-child { border-bottom: none; }
+.info-key {
+  color: var(--muted);
+  font-size: 13px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.info-val { text-align: right; font-weight: 500; color: var(--dark); }
+
+/* ── SCORING ── */
+.score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+@media (max-width: 500px) { .score-grid { grid-template-columns: 1fr; } }
+
+.score-item {
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid;
+}
+.score-burst { background: #fff5f8; border-color: #f8c0d0; }
+.score-over   { background: #f0f5ff; border-color: #bcd0f8; }
+.score-surv   { background: #f0f5ff; border-color: #bcd0f8; }
+.score-draw   { background: #f8f8f8; border-color: #e0e0e0; }
+
+.score-name { font-size: 14px; font-weight: 600; color: var(--dark); }
+.score-sub  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.score-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: .02em;
+  line-height: 1;
+}
+.score-badge.red  { color: var(--pink); }
+.score-badge.blue { color: #3a6fd8; }
+.score-badge.gray { color: #aaa; }
+
+/* ── RULING BOX ── */
+.ruling {
+  border-left: 3px solid var(--pink);
+  border-radius: 0 12px 12px 0;
+  background: var(--pink-faint);
+  padding: 14px 18px;
+  font-size: 14px;
+  line-height: 1.75;
+  margin-top: 12px;
+}
+.ruling strong { color: var(--pink-dark); }
+
+/* ── BRACKET ── */
+.bracket-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+.bracket-svg-wrap {
+  min-width: 660px;
+}
+
+/* ── TIMELINE ── */
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.tl-item {
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+}
+.tl-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  flex-shrink: 0;
+}
+.tl-time {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--pink);
+  white-space: nowrap;
+  padding-top: 14px;
+  letter-spacing: .02em;
+}
+.tl-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--pink);
+  margin: 6px 0;
+  flex-shrink: 0;
+}
+.tl-dot.final { background: var(--gold); width: 16px; height: 16px; box-shadow: 0 0 0 4px rgba(233,168,37,0.2); }
+.tl-line { flex: 1; width: 1px; background: var(--border); }
+.tl-item:last-child .tl-line { display: none; }
+.tl-body {
+  flex: 1;
+  padding: 10px 0 18px;
+}
+.tl-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  background: var(--pink-faint);
+  color: var(--pink);
+  border: 1px solid var(--border);
+  margin-bottom: 5px;
+}
+.tl-tag.gold-tag { background: #fdf6e8; color: #9b6d0f; border-color: #f0d98a; }
+.tl-heading { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+.tl-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+/* ── PRIZES ── */
+.prize-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 500px) { .prize-grid { grid-template-columns: 1fr; } }
+
+.prize-card {
+  border-radius: 14px;
+  padding: 22px 18px;
+  text-align: center;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+}
+.prize-card::before {
+  content: '';
+  position: absolute;
+  bottom: -20px; right: -20px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  opacity: .08;
+}
+.prize-gold   { background: #fffbf0; border-color: #f5dc8a; }
+.prize-gold::before { background: var(--gold); width: 100px; height: 100px; }
+.prize-silver { background: #f8f9fa; border-color: #d0d8e0; }
+.prize-silver::before { background: var(--silver); }
+.prize-bronze { background: #fdf8f5; border-color: #e8c8a8; }
+.prize-bronze::before { background: var(--bronze); }
+
+.prize-icon { font-size: 36px; margin-bottom: 6px; line-height: 1; }
+.prize-rank {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.prize-amt {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  letter-spacing: .04em;
+  line-height: 1;
+}
+.prize-gold   .prize-amt { color: #c8860a; }
+.prize-silver .prize-amt { color: #5a7080; }
+.prize-bronze .prize-amt { color: #8c4f20; }
+.prize-pct {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ── RULES ── */
+.rules-list { display: flex; flex-direction: column; gap: 8px; }
+.rule-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid #f0e8ec;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--dark);
+}
+.rule-n {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── REGISTRATION ── */
+.reg-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 500px) { .reg-fields { grid-template-columns: 1fr; } }
+.reg-field {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: #fff;
+}
+.reg-label { font-size: 11px; font-weight: 700; color: var(--pink); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+.reg-val { font-size: 14px; color: var(--dark); font-weight: 500; }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  font-size: 12px;
+  padding: 24px 20px;
+}
+.footer strong { color: var(--pink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow, .hero-title, .hero-subtitle, .hero-pills {
+  animation: fadeUp .7s ease both;
+}
+.hero-title    { animation-delay: .1s; }
+.hero-subtitle { animation-delay: .2s; }
+.hero-pills    { animation-delay: .3s; }
+
+/* ── SCROLL REVEAL (JS will add .visible) ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-spin"></div>
+  <p class="hero-eyebrow">公司內部活動 · 2026</p>
+  <h1 class="hero-title">爆旋<span>陀螺</span><br>比賽</h1>
+  <p class="hero-subtitle">2026年5月15日（星期五）&nbsp; 12:00 – 14:00 &nbsp;·&nbsp; 公司場地</p>
+  <div class="hero-pills">
+    <span class="pill pill-pink">10位參賽者</span>
+    <span class="pill pill-outline">雙敗淘汰制</span>
+    <span class="pill pill-outline">總獎金 $1,800</span>
+  </div>
+</header>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-val">10</div>
+    <div class="stat-lbl">參賽人數</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">$180</div>
+    <div class="stat-lbl">報名費 / 人</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">$1,800</div>
+    <div class="stat-lbl">總獎金池</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-val">2 HR</div>
+    <div class="stat-lbl">比賽時長</div>
+  </div>
+</div>
+
+<!-- 一：活動詳情 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <div class="section-num">一</div>
+      <h2 class="section-title">活動詳情</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="card reveal">
+      <div class="info-row"><span class="info-key">日期時間</span><span class="info-val">2026年5月15日（星期五）12:00 – 14:00</span></div>
+      <div class="info-row"><span class="info-key">場地</span><span class="info-val">公司指定空地 / 會議室（設標準 BX 戰鬥盤）</span></div>
+      <div class="info-row"><span class="info-key">主辦</span><span class="info-val">公司內部活動委員會</span></div>
+      <div class="info-row"><span class="info-key">參加費</span><span class="info-val">$180 / 人（全數轉為獎金）</span></div>
+      <div class="info-row"><span class="info-key">報名截止</span><span class="info-val">2026年5月13日（星期三）18:00</span></div>
+      <div class="info-row" style="border-bottom:none"><span class="info-key">推薦裝備</span><span class="info-val">Beyblade X（BX 系列）正版</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 二：裝備規則 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <div class="section-num">二</div>
+      <h2 class="section-title">裝備規則</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="card reveal">
+      <div class="info-row"><span class="info-key">推薦系列</span><span class="info-val">Beyblade X（BX 系列）正版產品</span></div>
+      <div class="info-row"><span class="info-key">允許系列</span><span class="info-val">Beyblade X 及 Burst 系列均可參賽</span></div>
+      <div class="info-row"><span class="info-key">禁止使用</span><span class="info-val">改裝零件、非官方仿製品</span></div>
+      <div class="info-row"><span class="info-key">陀螺數量</span><span class="info-val">每位最多攜帶 3 個，正式賽前申報</span></div>
+      <div class="info-row"><span class="info-key">出賽宣告</span><span class="info-val">每場比賽前向裁判申報使用陀螺</span></div>
+      <div class="info-row" style="border-bottom:none"><span class="info-key">啟動器</span><span class="info-val">不限型號，本體須符合申報</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 三：計分制 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <div class="section-num">三</div>
+      <h2 class="section-title">計分制度</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="score-grid reveal">
+      <div class="score-item score-burst">
+        <div>
+          <div class="score-name">Burst 爆裂</div>
+          <div class="score-sub">陀螺被打爆分離</div>
+        </div>
+        <div class="score-badge red">+2</div>
+      </div>
+      <div class="score-item score-over">
+        <div>
+          <div class="score-name">Over Finish 出盤</div>
+          <div class="score-sub">陀螺飛出或落入出口洞</div>
+        </div>
+        <div class="score-badge blue">+1</div>
+      </div>
+      <div class="score-item score-surv">
+        <div>
+          <div class="score-name">Survivor 剩旋</div>
+          <div class="score-sub">對方先停旋</div>
+        </div>
+        <div class="score-badge blue">+1</div>
+      </div>
+      <div class="score-item score-draw">
+        <div>
+          <div class="score-name">Draw 平局</div>
+          <div class="score-sub">雙方同時停旋</div>
+        </div>
+        <div class="score-badge gray">重打</div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:10px;">
+      <div class="info-row"><span class="info-key">每場制度</span><span class="info-val">三局兩勝制（最多 3 局）</span></div>
+      <div class="info-row"><span class="info-key">勝出條件</span><span class="info-val">率先取得 2 局勝利</span></div>
+      <div class="info-row"><span class="info-key">每局時限</span><span class="info-val">最長 3 分鐘</span></div>
+      <div class="info-row" style="border-bottom:none"><span class="info-key">逾時判定</span><span class="info-val">仍在旋轉者勝（Survivor +1）</span></div>
+    </div>
+
+    <div class="ruling reveal">
+      <strong>場邊出口洞裁決</strong>——陀螺落入場邊出口洞（Exit Pocket）裁定為 <strong>Over Finish</strong>，對手即時得 <strong>+1 分</strong>，不論陀螺入洞後是否仍在旋轉。此為 Beyblade X 官方標準規則，出口洞視同陀螺離開戰鬥盤邊界。
+    </div>
+  </div>
+</section>
+
+<!-- 四：賽制圖 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <div class="section-num">四</div>
+      <h2 class="section-title">雙敗淘汰賽制</h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="reveal" style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.7;">
+      每位參賽者需輸 <strong style="color:var(--dark)">兩場</strong> 方被淘汰。首次落敗後進入敗者組仍有機會奪冠。若總決賽由敗者組代表勝出，需加賽一場（Grand Final Reset）。
+    </p>
+    <div class="card reveal" style="padding:16px 12px;">
+      <div class="bracket-wrap">
+        <div class="bracket-svg-wrap">
+          <svg width="660" height="520" viewBox="0 0 660 520" xmlns="http://www.w3.org/2000/svg" style="display:block;font-family:'Noto Sans TC',sans-serif;">
+            <defs>
+              <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="#da1c5d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+              <marker id="arrg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="#aaa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+              <marker id="arro" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="#c07030" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </marker>
+            </defs>
+
+            <!-- Column headers -->
+            <text x="60" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#da1c5d" letter-spacing="1">W輪1</text>
+            <text x="178" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#da1c5d" letter-spacing="1">W輪2</text>
+            <text x="296" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#da1c5d" letter-spacing="1">W半決賽</text>
+            <text x="414" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#da1c5d" letter-spacing="1">W決賽</text>
+            <text x="560" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#c8860a" letter-spacing="1">總決賽</text>
+
+            <!-- W Round 1 boxes (5 matches) -->
+            <!-- W1 -->
+            <rect x="14" y="28" width="92" height="34" rx="7" fill="#fff5f8" stroke="#f0b0c0" stroke-width="1"/>
+            <text x="60" y="45" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#b0144a">比賽 W1</text>
+            <text x="60" y="57" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#c87090">2人</text>
+            <!-- W2 -->
+            <rect x="14" y="76" width="92" height="34" rx="7" fill="#fff5f8" stroke="#f0b0c0" stroke-width="1"/>
+            <text x="60" y="93" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#b0144a">比賽 W2</text>
+            <text x="60" y="105" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#c87090">2人</text>
+            <!-- W3 -->
+            <rect x="14" y="130" width="92" height="34" rx="7" fill="#fff5f8" stroke="#f0b0c0" stroke-width="1"/>
+            <text x="60" y="147" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#b0144a">比賽 W3</text>
+            <!-- W4 -->
+            <rect x="14" y="178" width="92" height="34" rx="7" fill="#fff5f8" stroke="#f0b0c0" stroke-width="1"/>
+            <text x="60" y="195" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#b0144a">比賽 W4</text>
+            <!-- Bye -->
+            <rect x="14" y="226" width="92" height="34" rx="7" fill="#f8f8f8" stroke="#ddd" stroke-width="1"/>
+            <text x="60" y="243" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="600" fill="#999">Bye 輪空</text>
+
+            <!-- W1 arrows → W5 -->
+            <line x1="106" y1="45" x2="132" y2="72" stroke="#da1c5d" stroke-width="0.8" marker-end="url(#arr)"/>
+            <line x1="106" y1="93" x2="132" y2="70" stroke="#da1c5d" stroke-width="0.8" marker-end="url(#arr)"/>
+            <!-- W3/W4/Bye → W6 -->
+            <line x1="106" y1="147" x2="132" y2="172" stroke="#da1c5d" stroke-width="0.8" marker-end="url(#arr)"/>
+            <line x1="106" y1="195" x2="132" y2="177" stroke="#da1c5d" stroke-width="0.8" marker-end="url(#arr)"/>
+            <line x1="106" y1="243" x2="132" y2="183" stroke="#aaa" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#arrg)"/>
+
+            <!-- W Round 2 -->
+            <rect x="132" y="50" width="92" height="34" rx="7" fill="#fff5f8" stroke="#f0b0c0" stroke-width="1"/>
+            <text x="178" y="67" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#b0144a">比賽 W5</text>
+            <rect x="132" y="156" width="92" height="34" rx="7" fill="#fff5f8" stroke="#f0b0c0" stroke-width="1"/>
+            <text x="178" y="173" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#b0144a">比賽 W6</text>
+
+            <!-- W2 → W Semi -->
+            <line x1="224" y1="67" x2="250" y2="106" stroke="#da1c5d" stroke-width="0.8" marker-end="url(#arr)"/>
+            <line x1="224" y1="173" x2="250" y2="118" stroke="#da1c5d" stroke-width="0.8" marker-end="url(#arr)"/>
+
+            <!-- W Semi -->
+            <rect x="250" y="96" width="92" height="34" rx="7" fill="#fff5f8" stroke="#f0b0c0" stroke-width="1"/>
+            <text x="296" y="113" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#b0144a">W 半決賽</text>
+
+            <line x1="342" y1="113" x2="368" y2="113" stroke="#da1c5d" stroke-width="0.8" marker-end="url(#arr)"/>
+
+            <!-- W Final -->
+            <rect x="368" y="96" width="92" height="34" rx="7" fill="#fce8f0" stroke="#da1c5d" stroke-width="1.5"/>
+            <text x="414" y="113" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#9a0e40">W 決賽</text>
+
+            <!-- W Final winner → Grand Final -->
+            <path d="M460 113 L520 113 L520 240" fill="none" stroke="#da1c5d" stroke-width="0.8" marker-end="url(#arr)"/>
+
+            <!-- ── DIVIDER ── -->
+            <line x1="14" y1="278" x2="640" y2="278" stroke="#f0d0da" stroke-width="1" stroke-dasharray="5 5"/>
+            <text x="330" y="294" text-anchor="middle" font-size="11" font-weight="700" fill="#c87090" letter-spacing="2">敗 者 組</text>
+
+            <!-- L labels -->
+            <text x="60"  y="310" text-anchor="middle" font-size="11" font-weight="700" fill="#c07030" letter-spacing="1">L輪1</text>
+            <text x="178" y="310" text-anchor="middle" font-size="11" font-weight="700" fill="#c07030" letter-spacing="1">L輪2</text>
+            <text x="296" y="310" text-anchor="middle" font-size="11" font-weight="700" fill="#c07030" letter-spacing="1">L半決賽</text>
+            <text x="414" y="310" text-anchor="middle" font-size="11" font-weight="700" fill="#c07030" letter-spacing="1">L決賽</text>
+
+            <!-- L Round 1 -->
+            <rect x="14" y="318" width="92" height="34" rx="7" fill="#fff8f0" stroke="#e8c090" stroke-width="1"/>
+            <text x="60" y="335" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#9a5010">L輪1 ×2場</text>
+            <!-- L Round 2 -->
+            <rect x="132" y="318" width="92" height="34" rx="7" fill="#fff8f0" stroke="#e8c090" stroke-width="1"/>
+            <text x="178" y="335" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#9a5010">L輪2 ×2場</text>
+            <!-- L Semi -->
+            <rect x="250" y="318" width="92" height="34" rx="7" fill="#fff8f0" stroke="#e8c090" stroke-width="1"/>
+            <text x="296" y="335" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#9a5010">L 半決賽</text>
+            <!-- L Final -->
+            <rect x="368" y="318" width="92" height="34" rx="7" fill="#fdf0e0" stroke="#c07030" stroke-width="1.5"/>
+            <text x="414" y="335" text-anchor="middle" dominant-baseline="central" font-size="12" font-weight="700" fill="#7a3a08">L 決賽</text>
+
+            <!-- L arrows -->
+            <line x1="106" y1="335" x2="132" y2="335" stroke="#c07030" stroke-width="0.8" marker-end="url(#arro)"/>
+            <line x1="224" y1="335" x2="250" y2="335" stroke="#c07030" stroke-width="0.8" marker-end="url(#arro)"/>
+            <line x1="342" y1="335" x2="368" y2="335" stroke="#c07030" stroke-width="0.8" marker-end="url(#arro)"/>
+
+            <!-- Drop arrows W→L (dashed) -->
+            <path d="M178 190 L178 260 L178 318" fill="none" stroke="#da1c5d" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+            <path d="M296 130 L296 260 L296 318" fill="none" stroke="#da1c5d" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+            <path d="M414 130 L414 260 L414 318" fill="none" stroke="#da1c5d" stroke-width="0.8" stroke-dasharray="3 3" marker-end="url(#arr)"/>
+
+            <!-- L Final → Grand Final -->
+            <path d="M460 335 L520 335 L520 272" fill="none" stroke="#c07030" stroke-width="0.8" marker-end="url(#arro)"/>
+
+            <!-- GRAND FINAL -->
+            <rect x="505" y="220" width="110" height="52" rx="10" fill="#fffbe8" stroke="#e9a825" stroke-width="2"/>
+            <text x="560" y="240" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="#8a6000">總決賽</text>
+            <text x="560" y="258" text-anchor="middle" dominant-baseline="central" font-size="10" fill="#b08020">冠亞軍決定</text>
+
+            <!-- Legend -->
+            <rect x="14" y="398" width="10" height="10" rx="2" fill="#f8c0d0"/>
+            <text x="28" y="407" font-size="11" fill="#888">勝者組</text>
+            <rect x="96" y="398" width="10" height="10" rx="2" fill="#e8c090"/>
+            <text x="110" y="407" font-size="11" fill="#888">敗者組</text>
+            <rect x="178" y="398" width="10" height="10" rx="2" fill="#f5dc8a"/>
+            <text x="192" y="407" font-size="11" fill="#888">決賽</text>
+            <line x1="248" y1="403" x2="268" y2="403" stroke="#da1c5d" stroke-width="1" stroke-dasharray="3 3"/>
+            <text x="274" y="407" font-size="11" fill="#888">落敗進敗者組</text>
+
+            <text x="14" y="430" font-size="11" fill="#aaa">* 共約 17–19 場　 * 若敗者組代表贏得總決賽，需加賽一場（Grand Final Reset）</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 五：賽程時間表 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <div class="section-num">五</div>
+      <h2 class="section-title">賽程時間表</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="timeline reveal">
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-time">12:00</div>
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-tag">報到</div>
+          <div class="tl-heading">簽到 · 申報陀螺 · 抽籤</div>
+          <div class="tl-desc">參賽者簽到，向裁判申報出賽陀螺，進行賽制抽籤排位</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-time">12:15</div>
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-tag">開幕</div>
+          <div class="tl-heading">規則說明 · 裁判介紹</div>
+          <div class="tl-desc">主持人宣佈賽制細則，介紹裁判，確認戰鬥盤設置</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-time">12:20</div>
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-tag">主賽</div>
+          <div class="tl-heading">勝者組 W輪1–2 · 敗者組 L輪1–2</div>
+          <div class="tl-desc">各輪賽事依序進行，多盤可並行。勝者晉級，落敗者進入敗者組繼續作賽</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-time">13:20</div>
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-tag">半決賽</div>
+          <div class="tl-heading">W 半決賽 · L 半決賽</div>
+          <div class="tl-desc">勝者組及敗者組各一場半決賽，決出各組決賽代表</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-time">13:40</div>
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-tag">決賽</div>
+          <div class="tl-heading">W 決賽 · L 決賽</div>
+          <div class="tl-desc">勝者組冠軍決定賽，以及敗者組最後一席總決賽入場資格戰</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-time">13:50</div>
+          <div class="tl-dot final"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-tag gold-tag">總決賽 · 頒獎</div>
+          <div class="tl-heading">冠亞軍總決賽 · 頒獎典禮</div>
+          <div class="tl-desc">勝者組代表 vs 敗者組代表，若敗者組勝出需加賽一場。隨後即場頒發獎金</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-time">14:00</div>
+          <div class="tl-dot" style="background:var(--muted)"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-body">
+          <div class="tl-tag" style="background:#f5f5f5;color:#888;border-color:#ddd;">結束</div>
+          <div class="tl-heading">活動完結</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 六：獎金 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <div class="section-num">六</div>
+      <h2 class="section-title">獎金分配</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="prize-grid reveal">
+      <div class="prize-card prize-gold">
+        <div class="prize-icon">🥇</div>
+        <div class="prize-rank">冠軍</div>
+        <div class="prize-amt">$990</div>
+        <div class="prize-pct">55% · 總獎金池</div>
+      </div>
+      <div class="prize-card prize-silver">
+        <div class="prize-icon">🥈</div>
+        <div class="prize-rank">亞軍</div>
+        <div class="prize-amt">$540</div>
+        <div class="prize-pct">30% · 總獎金池</div>
+      </div>
+      <div class="prize-card prize-bronze">
+        <div class="prize-icon">🥉</div>
+        <div class="prize-rank">季軍</div>
+        <div class="prize-amt">$270</div>
+        <div class="prize-pct">15% · 總獎金池</div>
+      </div>
+    </div>
+    <div class="card reveal" style="margin-top:12px;text-align:center;">
+      <div style="font-size:13px;color:var(--muted);line-height:1.8;">
+        總獎金 <strong style="color:var(--pink)">$1,800</strong>（10 × $180 報名費全數發放）
+        &nbsp;·&nbsp; 季軍由 L決賽落敗者獲得
+        &nbsp;·&nbsp; 頒獎典禮即場現金發放
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 七：賽場規則 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <div class="section-num">七</div>
+      <h2 class="section-title">賽場規則</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="rules-list reveal">
+      <div class="rule-item"><span class="rule-n">1</span><span>裁判員判決為最終，不得異議。</span></div>
+      <div class="rule-item"><span class="rule-n">2</span><span>每場比賽開始前，雙方須向裁判出示陀螺並確認合規。</span></div>
+      <div class="rule-item"><span class="rule-n">3</span><span>啟動器（Launcher）不限型號，但陀螺本體須符合賽前申報型號。</span></div>
+      <div class="rule-item"><span class="rule-n">4</span><span>比賽期間不得故意觸碰對方陀螺或戰鬥盤，否則判負該局。</span></div>
+      <div class="rule-item"><span class="rule-n">5</span><span><strong style="color:var(--pink-dark)">出口洞裁決：</strong>陀螺落入場邊出口洞視為 Over Finish，對手即時得 +1 分，不論陀螺入洞後是否仍在旋轉。</span></div>
+      <div class="rule-item"><span class="rule-n">6</span><span>雙方陀螺同時停旋（Draw），該局重打，不計分。</span></div>
+      <div class="rule-item"><span class="rule-n">7</span><span>比賽期間保持安靜，觀眾不得干擾賽事進行。</span></div>
+      <div class="rule-item"><span class="rule-n">8</span><span>如陀螺損壞不能繼續作賽，須即時通知裁判，由裁判裁決是否允許更換備用。</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 八：報名 -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <div class="section-num">八</div>
+      <h2 class="section-title">參賽報名</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="reg-fields reveal">
+      <div class="reg-field"><div class="reg-label">姓名</div><div class="reg-val">中文全名 / 英文名</div></div>
+      <div class="reg-field"><div class="reg-label">部門</div><div class="reg-val">所屬部門</div></div>
+      <div class="reg-field"><div class="reg-label">聯絡方法</div><div class="reg-val">公司電郵 / 內部電話</div></div>
+      <div class="reg-field"><div class="reg-label">使用陀螺</div><div class="reg-val">預計出賽型號（最多 3 個）</div></div>
+      <div class="reg-field"><div class="reg-label">繳費方式</div><div class="reg-val">$180 ── 轉帳或現金均可</div></div>
+      <div class="reg-field" style="border-color:var(--border);background:var(--pink-faint);">
+        <div class="reg-label">報名截止</div>
+        <div class="reg-val" style="color:var(--pink);">2026年5月13日（三）18:00</div>
+      </div>
+    </div>
+    <div class="card reveal" style="margin-top:12px;background:var(--pink-faint);border-color:var(--border);">
+      <div style="font-size:13px;color:var(--muted);line-height:1.8;">
+        名額先到先得，滿 10 人即截止。報名後如需退出，請於截止前通知主辦方，逾期不退款。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  公司內部活動 &nbsp;·&nbsp; <strong>爆旋陀螺比賽 2026</strong> &nbsp;·&nbsp; 如有查詢請聯絡活動委員會
+</footer>
+
+<script>
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
